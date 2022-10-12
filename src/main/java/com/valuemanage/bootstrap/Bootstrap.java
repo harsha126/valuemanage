@@ -48,6 +48,13 @@ public class Bootstrap implements CommandLineRunner {
         commentRepository.save(comment4);
         commentRepository.save(comment5);
 
+        Address address1 = Address.builder().city("hyd").build();
+        Address address2 = Address.builder().city("del").build();
+        Address address3 = Address.builder().city("chennai").build();
+        addressRepository.save(address1);
+        addressRepository.save(address2);
+        addressRepository.save(address3);
+
         Attendence attendence1 = Attendence.builder().date(date).build();
         Attendence attendence2 = Attendence.builder().date(date).build();
         Attendence attendence3 = Attendence.builder().date(date).build();
@@ -81,9 +88,9 @@ public class Bootstrap implements CommandLineRunner {
         orderRepository.save(order10);
         orderRepository.save(order11);
 
-        Retailer retailer1 = Retailer.builder().name("retailer1").build();
-        Retailer retailer2 = Retailer.builder().name("retailer2").build();
-        Retailer retailer3 = Retailer.builder().name("retailer3").build();
+        Retailer retailer1 = Retailer.builder().name("retailer1").address(address1).build();
+        Retailer retailer2 = Retailer.builder().name("retailer2").address(address2).build();
+        Retailer retailer3 = Retailer.builder().name("retailer3").address(address3).build();
         Retailer retailer4 = Retailer.builder().name("retailer4").build();
         Retailer retailer5 = Retailer.builder().name("retailer5").build();
         Retailer retailer6 = Retailer.builder().name("retailer6").build();

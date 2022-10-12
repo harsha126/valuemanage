@@ -25,15 +25,16 @@ public class Representative {
     private String phoneNumber;
     @OneToMany
     @Builder.Default
-    private Set<Comment> comments = new HashSet<>();;
+    private Set<Comment> comments = new HashSet<>();
     @OneToMany
     @Builder.Default
-    private Set<Report> reports = new HashSet<>();;
+    private Set<Report> reports = new HashSet<>();
     @OneToMany
     @Builder.Default
-    private Set<Retailer> retailers = new HashSet<>();;
+    private Set<Retailer> retailers = new HashSet<>();
     @OneToMany
     @Builder.Default
-    private Set<Attendence> attendances = new HashSet<>();;
+    private Set<Attendence> attendances = new HashSet<>();
+    private String owner;
 
 }

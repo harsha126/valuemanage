@@ -23,7 +23,11 @@ public class RetailerServiceImpl implements RetailerService {
 
     @Override
     public Page<RetailerDTO> getAllRetailers(Pageable pageable) {
-        return retailerRepository.findAll(pageable).map(retailerListMapper::RetailerToRetailerDTO);
+        return retailerRepository.findAll(pageable).map(retailer -> {
+            RetailerDTO retailerDTO = retailerListMapper.RetailerToRetailerDTO(retailer);
+            retailerDTO.setRetailerUrl("/api/v1/retailers/"+retailer.getId());
+            return retailerDTO;
+        });
     }
 
     @Override

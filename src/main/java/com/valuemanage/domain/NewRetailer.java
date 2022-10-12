@@ -1,21 +1,23 @@
-package com.valuemanage.api.v1.model;
+package com.valuemanage.domain;
 
-import com.valuemanage.domain.Address;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-public class RetailerDTO {
-    private Long id;
+@AllArgsConstructor
+public class NewRetailer {
     private String name;
     private String businessName;
+    private String houseNo;
+    private String street;
+    private String city;
+    private String pinCode;
+    private String state;
+    private String country;
     private String phoneNumber;
     private String owner;
-    private Address address;
-    private String retailerUrl;
 }

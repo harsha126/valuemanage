@@ -23,6 +23,6 @@ public class Report {
     private Long metOld;
     private Long orders;
     private Date date;
-    @OneToMany
-    private Set<Comment> comments;
+    @OneToOne
+    private Comment comment;
 }
