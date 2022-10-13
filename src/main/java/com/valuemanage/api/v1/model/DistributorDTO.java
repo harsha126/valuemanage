@@ -1,5 +1,6 @@
-package com.valuemanage.domain;
+package com.valuemanage.api.v1.model;
 
+import com.valuemanage.domain.Address;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,16 +10,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewDistributor {
+public class DistributorDTO {
+    private Long id;
     private String name;
     private String businessName;
-    private String houseNo;
-    private String street;
-    private String city;
-    private String pinCode;
-    private String state;
-    private String country;
     private String phoneNumber;
     private String owner;
+    private Address address;
     private String erp;
 }

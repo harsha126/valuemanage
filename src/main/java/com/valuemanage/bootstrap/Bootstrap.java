@@ -2,6 +2,7 @@ package com.valuemanage.bootstrap;
 
 import com.valuemanage.domain.*;
 import com.valuemanage.repositories.*;
+import com.valuemanage.services.DistributorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.util.Date;
 public class Bootstrap implements CommandLineRunner {
 
     private final AddressRepository addressRepository;
+    private final DistributorService distributorService;
     private final AttendenceRepository attendenceRepository;
     private final CommentRepository commentRepository;
     private final ManagerRepository managerRepository;
@@ -22,8 +24,9 @@ public class Bootstrap implements CommandLineRunner {
     private final RepresentativeRepository representativeRepository;
     private final RetailerRepository retailerRepository;
 
-    public Bootstrap(AddressRepository addressRepository, AttendenceRepository attendenceRepository, CommentRepository commentRepository, ManagerRepository managerRepository, OrderRepository orderRepository, ReportRepository reportRepository, RepresentativeRepository representativeRepository, RetailerRepository retailerRepository) {
+    public Bootstrap(AddressRepository addressRepository, DistributorService distributorService, AttendenceRepository attendenceRepository, CommentRepository commentRepository, ManagerRepository managerRepository, OrderRepository orderRepository, ReportRepository reportRepository, RepresentativeRepository representativeRepository, RetailerRepository retailerRepository) {
         this.addressRepository = addressRepository;
+        this.distributorService = distributorService;
         this.attendenceRepository = attendenceRepository;
         this.commentRepository = commentRepository;
         this.managerRepository = managerRepository;
@@ -155,6 +158,26 @@ public class Bootstrap implements CommandLineRunner {
 
         Manager manager1 = Manager.builder().name("Man1").build();
         Manager manager2 = Manager.builder().name("Man2").build();
+
+        Distributor distributor1 = Distributor.builder().name("dis1").address(address2).build();
+        Distributor distributor2 = Distributor.builder().name("dis2").address(address1).build();
+        Distributor distributor3 = Distributor.builder().name("dis3").build();
+        Distributor distributor4 = Distributor.builder().name("dis4").address(address3).build();
+        Distributor distributor5 = Distributor.builder().name("dis5").build();
+        System.out.println(distributor5.getId());
+        distributorService.save(distributor1);
+        distributorService.save(distributor2);
+        distributorService.save(distributor3);
+        distributorService.save(distributor4);
+        distributorService.save(distributor5);
+
+
+        manager1.getDistributors().add(distributor1);
+        manager1.getDistributors().add(distributor2);
+        manager2.getDistributors().add(distributor3);
+        manager2.getDistributors().add(distributor4);
+        manager2.getDistributors().add(distributor5);
+        System.out.println(distributor5.getId());
 
         manager1.getRepresentatives().add(representative1);
         manager1.getRepresentatives().add(representative2);

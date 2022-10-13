@@ -41,16 +41,16 @@ public class RepresentativeServiceImpl implements RepresentativeService {
 
     @Override
     public Page<RetailerDTO> getAllRetailers(Pageable pageable, Long rep_id) {
-        return representativeRepository.findAllRetailer(rep_id,pageable).map(retailer -> {
+        return representativeRepository.findAllRetailer(rep_id, pageable).map(retailer -> {
             RetailerDTO retailerDTO = retailerListMapper.RetailerToRetailerDTO(retailer);
-            retailerDTO.setRetailerUrl("/api/v1/retailers/"+retailer.getId());
+            retailerDTO.setRetailerUrl("/api/v1/retailers/" + retailer.getId());
             return retailerDTO;
         });
     }
 
     @Override
     public Page<RetailerInfoDTO> getRetailerById(Long ret_id, Long rep_id, Pageable pageable) {
-        return representativeRepository.findRetailerById(rep_id,ret_id,pageable).map(retailerInfoMapper::RetailerToRetailerInfo);
+        return representativeRepository.findRetailerById(rep_id, ret_id, pageable).map(retailerInfoMapper::RetailerToRetailerInfo);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class RepresentativeServiceImpl implements RepresentativeService {
     }
 
     @Override
-    public Report saveReport(Long rep_id,NewReport newReport) throws ParseException {
+    public Report saveReport(Long rep_id, NewReport newReport) throws ParseException {
         Report savedReport = reportService.save(newReport);
         Representative representative = representativeRepository.findById(rep_id).get();
         representative.getReports().add(savedReport);
@@ -75,7 +75,7 @@ public class RepresentativeServiceImpl implements RepresentativeService {
     @Override
     public Report checkReport(Long rep_id) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        return representativeRepository.findReportByDate(rep_id,format.parse(format.format(new Date())));
+        return representativeRepository.findReportByDate(rep_id, format.parse(format.format(new Date())));
     }
 
     @Override
@@ -91,8 +91,8 @@ public class RepresentativeServiceImpl implements RepresentativeService {
     public Attendence getAttendance(Long rep_id) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         Date date = format.parse(format.format(new Date()));
-        Attendence attendence = representativeRepository.getAttendance(rep_id,date);
-        if(attendence== null) return new Attendence();
+        Attendence attendence = representativeRepository.getAttendance(rep_id, date);
+        if (attendence == null) return new Attendence();
         return attendence;
     }
 

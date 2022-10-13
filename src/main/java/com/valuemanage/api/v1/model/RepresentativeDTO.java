@@ -1,5 +1,6 @@
 package com.valuemanage.api.v1.model;
 
+import com.valuemanage.domain.Address;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,5 @@ public class RepresentativeDTO {
     private String businessName;
     private String phoneNumber;
     private String owner;
+    private Address address;
 }

@@ -23,7 +23,7 @@ public class RetailerController {
     }
 
     @GetMapping({"/{Id}"})
-    public Page<RetailerInfoDTO> getAllRetailers(@RequestParam(name = "size",defaultValue = "5") int size,
+    public Page<RetailerInfoDTO> getRetailerInfo(@RequestParam(name = "size",defaultValue = "5") int size,
                                                  @RequestParam(name = "page",defaultValue = "0") int page,
                                                  @PathVariable String Id){
         System.out.println(Id);

@@ -21,5 +21,6 @@ public class Distributor {
     @OneToOne
     private Address address;
     private String phoneNumber;
-    private String ERP;
+    private String owner;
+    private String erp;
 }
