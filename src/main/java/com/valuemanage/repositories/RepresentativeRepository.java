@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Date;
+import java.util.List;
 
 public interface RepresentativeRepository extends JpaRepository<Representative,Long> {
 
@@ -22,4 +23,6 @@ public interface RepresentativeRepository extends JpaRepository<Representative,L
     Report findReportByDate(Long rep_id,Date date);
     @Query("select a from Representative r join r.attendances a where r.id = ?1 and a.date = ?2")
     Attendence getAttendance(Long rep_id,Date date);
+    @Query("select a from Representative r join r.attendances a where r.id = ?1")
+    List<Attendence> getAllAttendence(Long rep_id);
 }

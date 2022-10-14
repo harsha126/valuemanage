@@ -4,20 +4,16 @@ import com.valuemanage.domain.Comment;
 import com.valuemanage.domain.NewReport;
 import com.valuemanage.domain.Report;
 import com.valuemanage.repositories.ReportRepository;
-import org.mapstruct.ReportingPolicy;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 @Service
+@AllArgsConstructor
 public class ReportServiceImpl implements ReportService {
     private final ReportRepository reportRepository;
     private final CommentService commentService;
-
-    public ReportServiceImpl(ReportRepository reportRepository, CommentService commentService) {
-        this.reportRepository = reportRepository;
-        this.commentService = commentService;
-    }
 
     @Override
     public Report save(Report report) throws ParseException {

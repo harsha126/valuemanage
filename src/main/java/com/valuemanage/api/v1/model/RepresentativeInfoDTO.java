@@ -1,9 +1,6 @@
 package com.valuemanage.api.v1.model;
 
-import com.valuemanage.domain.Attendence;
-import com.valuemanage.domain.Comment;
-import com.valuemanage.domain.Order;
-import com.valuemanage.domain.Report;
+import com.valuemanage.domain.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +18,7 @@ public class RepresentativeInfoDTO {
     private String businessName;
     private String phoneNumber;
     private String owner;
-    private Set<Comment> comments;
     private Set<Attendence> attendances;
     private Set<Report> reports;
+    private Set<String> retailers;
 }

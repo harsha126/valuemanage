@@ -9,6 +9,7 @@ import com.valuemanage.repositories.AddressRepository;
 import com.valuemanage.repositories.ReportRepository;
 import com.valuemanage.repositories.RepresentativeRepository;
 import com.valuemanage.repositories.RetailerRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,10 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class RepresentativeServiceImpl implements RepresentativeService {
     private final RepresentativeRepository representativeRepository;
     private final RetailerRepository retailerRepository;
@@ -28,16 +31,6 @@ public class RepresentativeServiceImpl implements RepresentativeService {
     private final ReportService reportService;
     private final AttendenceService attendenceService;
 
-    public RepresentativeServiceImpl(RepresentativeRepository representativeRepository, RetailerRepository retailerRepository, AddressRepository addressRepository, RetailerInfoMapper retailerInfoMapper, RetailerListMapper retailerListMapper, ReportRepository reportRepository, ReportService reportService, AttendenceService attendenceService) {
-        this.representativeRepository = representativeRepository;
-        this.retailerRepository = retailerRepository;
-        this.addressRepository = addressRepository;
-        this.retailerInfoMapper = retailerInfoMapper;
-        this.retailerListMapper = retailerListMapper;
-        this.reportRepository = reportRepository;
-        this.reportService = reportService;
-        this.attendenceService = attendenceService;
-    }
 
     @Override
     public Page<RetailerDTO> getAllRetailers(Pageable pageable, Long rep_id) {
@@ -94,6 +87,11 @@ public class RepresentativeServiceImpl implements RepresentativeService {
         Attendence attendence = representativeRepository.getAttendance(rep_id, date);
         if (attendence == null) return new Attendence();
         return attendence;
+    }
+
+    @Override
+    public List<Attendence> getAllAttendence(Long rep_id)  {
+        return representativeRepository.getAllAttendence(rep_id);
     }
 
 

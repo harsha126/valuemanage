@@ -9,8 +9,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping({"/api/v1/representatives"})
 public class RepresentativeController {
     private final RepresentativeService representativeService;
@@ -63,6 +65,11 @@ public class RepresentativeController {
     @GetMapping({"/{rep_id}/attendance"})
     public Attendence checkAttendence(@PathVariable String rep_id) throws ParseException {
         return representativeService.getAttendance(Long.parseLong(rep_id));
+    }
+
+    @GetMapping({"/{rep_id}/attendence/all"})
+    public List<Attendence> getAttendence(@PathVariable String rep_id){
+        return representativeService.getAllAttendence(Long.parseLong(rep_id));
     }
 
 

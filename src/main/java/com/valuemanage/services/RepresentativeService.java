@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.text.ParseException;
+import java.util.List;
 
 public interface RepresentativeService {
 
@@ -23,4 +24,6 @@ public interface RepresentativeService {
     public Attendence addAttendance(Long rep_id,Attendence attendence) throws ParseException;
 
     public Attendence getAttendance(Long rep_id) throws ParseException;
+
+    public List<Attendence> getAllAttendence(Long rep_id) ;
 }

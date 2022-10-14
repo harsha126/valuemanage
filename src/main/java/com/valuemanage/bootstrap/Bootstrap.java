@@ -3,15 +3,20 @@ package com.valuemanage.bootstrap;
 import com.valuemanage.domain.*;
 import com.valuemanage.repositories.*;
 import com.valuemanage.services.DistributorService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Component
+@AllArgsConstructor
 public class Bootstrap implements CommandLineRunner {
 
     private final AddressRepository addressRepository;
@@ -23,23 +28,20 @@ public class Bootstrap implements CommandLineRunner {
     private final ReportRepository reportRepository;
     private final RepresentativeRepository representativeRepository;
     private final RetailerRepository retailerRepository;
+    private final UserRepository userRepository;
 
-    public Bootstrap(AddressRepository addressRepository, DistributorService distributorService, AttendenceRepository attendenceRepository, CommentRepository commentRepository, ManagerRepository managerRepository, OrderRepository orderRepository, ReportRepository reportRepository, RepresentativeRepository representativeRepository, RetailerRepository retailerRepository) {
-        this.addressRepository = addressRepository;
-        this.distributorService = distributorService;
-        this.attendenceRepository = attendenceRepository;
-        this.commentRepository = commentRepository;
-        this.managerRepository = managerRepository;
-        this.orderRepository = orderRepository;
-        this.reportRepository = reportRepository;
-        this.representativeRepository = representativeRepository;
-        this.retailerRepository = retailerRepository;
-    }
+//    private PasswordEncoder passwordEncoder;
+
 
     @Override
     public void run(String... args) throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
+//        User dan = new User("dan",passwordEncoder.encode("dan123"),"USER","");
+//        User admin = new User("admin",passwordEncoder.encode("admin123"),"ADMIN","ACCESS_TEST1,ACCESS_TEST2");
+//        User manager = new User("manager",passwordEncoder.encode("manager123"),"MANAGER","ACCESS_TEST1");
+//        List<User> users = Arrays.asList(dan,admin,manager);
+//        userRepository.saveAll(users);
         Comment comment1 = Comment.builder().text("comment1").build();
         Comment comment2 = Comment.builder().text("comment2").build();
         Comment comment3 = Comment.builder().text("comment3").build();
@@ -91,16 +93,16 @@ public class Bootstrap implements CommandLineRunner {
         orderRepository.save(order10);
         orderRepository.save(order11);
 
-        Retailer retailer1 = Retailer.builder().name("retailer1").address(address1).build();
-        Retailer retailer2 = Retailer.builder().name("retailer2").address(address2).build();
-        Retailer retailer3 = Retailer.builder().name("retailer3").address(address3).build();
-        Retailer retailer4 = Retailer.builder().name("retailer4").build();
-        Retailer retailer5 = Retailer.builder().name("retailer5").build();
-        Retailer retailer6 = Retailer.builder().name("retailer6").build();
-        Retailer retailer7 = Retailer.builder().name("retailer7").build();
-        Retailer retailer8 = Retailer.builder().name("retailer8").build();
-        Retailer retailer9 = Retailer.builder().name("retailer9").build();
-        Retailer retailer10 = Retailer.builder().name("retailer10").build();
+        Retailer retailer1 = Retailer.builder().name("retailer1").businessName("Buss Ret 1").address(address1).build();
+        Retailer retailer2 = Retailer.builder().name("retailer2").businessName("Buss Ret 2").address(address2).build();
+        Retailer retailer3 = Retailer.builder().name("retailer3").businessName("Buss Ret 3").address(address3).build();
+        Retailer retailer4 = Retailer.builder().name("retailer4").businessName("Buss Ret 4").build();
+        Retailer retailer5 = Retailer.builder().name("retailer5").businessName("Buss Ret 5").build();
+        Retailer retailer6 = Retailer.builder().name("retailer6").businessName("Buss Ret 6").build();
+        Retailer retailer7 = Retailer.builder().name("retailer7").businessName("Buss Ret 7").build();
+        Retailer retailer8 = Retailer.builder().name("retailer8").businessName("Buss Ret 8").build();
+        Retailer retailer9 = Retailer.builder().name("retailer9").businessName("Buss Ret 9").build();
+        Retailer retailer10 = Retailer.builder().name("retailer10").businessName("Buss Ret 10").build();
 
         retailer1.getOrders().add(order1);
         retailer2.getOrders().add(order2);
