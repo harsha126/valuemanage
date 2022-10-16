@@ -3,6 +3,7 @@ package com.valuemanage.bootstrap;
 import com.valuemanage.domain.*;
 import com.valuemanage.repositories.*;
 import com.valuemanage.services.DistributorService;
+import com.valuemanage.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -31,6 +32,7 @@ public class Bootstrap implements CommandLineRunner {
     private final RepresentativeRepository representativeRepository;
     private final RetailerRepository retailerRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
 //    private PasswordEncoder passwordEncoder;
 
@@ -46,21 +48,13 @@ public class Bootstrap implements CommandLineRunner {
         Date date4 = formatter.parse("01/10/2022");
         Date date5 = formatter.parse("12/10/2022");
 
-        User user1 = User.builder().username("man0").password(passwordEncoder.encode("admin")).role("MANAGER").uid(1L).build();
-        User user2 = User.builder().username("man1").password(passwordEncoder.encode("admin")).role("MANAGER").uid(2L).build();
-        User user3 = User.builder().username("rep0").password(passwordEncoder.encode("admin")).role("REPRESENTATIVE").uid(1L).build();
-        User user4 = User.builder().username("rep1").password(passwordEncoder.encode("admin")).role("REPRESENTATIVE").uid(2L).build();
-        User user5 = User.builder().username("rep2").password(passwordEncoder.encode("admin")).role("REPRESENTATIVE").uid(3L).build();
-        User user6 = User.builder().username("rep3").password(passwordEncoder.encode("admin")).role("REPRESENTATIVE").uid(4L).build();
-        User user7 = User.builder().username("rep4").password(passwordEncoder.encode("admin")).role("REPRESENTATIVE").uid(5L).build();
-
-        userRepository.save(user1);
-        userRepository.save(user2);
-        userRepository.save(user3);
-        userRepository.save(user4);
-        userRepository.save(user5);
-        userRepository.save(user6);
-        userRepository.save(user7);
+        userService.saveNewUser("man0","admin","MANAGER",1L);
+        userService.saveNewUser("man1","admin","MANAGER",2L);
+        userService.saveNewUser("rep0","admin","REPRESENTATIVE",1L);
+        userService.saveNewUser("rep1","admin","REPRESENTATIVE",2L);
+        userService.saveNewUser("rep2","admin","REPRESENTATIVE",3L);
+        userService.saveNewUser("rep3","admin","REPRESENTATIVE",4L);
+        userService.saveNewUser("rep4","admin","REPRESENTATIVE",5L);
 
         Comment comment1 = Comment.builder().text("comment1").build();
         Comment comment2 = Comment.builder().text("comment2").build();
