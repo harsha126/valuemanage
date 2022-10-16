@@ -49,7 +49,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public Page<RepresentativeDTO> getAllRepresentatives(Long man_id, Pageable pageable) {
-        return managerRepository.findAllRepresentatives(man_id,pageable).map(representativeListMapper::RepresentativeToRepresentativeDTO);
+        return managerRepository.findAllRepresentatives(man_id, pageable).map(representativeListMapper::RepresentativeToRepresentativeDTO);
     }
 
     @Override
@@ -82,7 +82,8 @@ public class ManagerServiceImpl implements ManagerService {
         Manager manager = managerRepository.findById(man_id).get();
         manager.getReports().add(savedReport);
         managerRepository.save(manager);
-        return savedReport;    }
+        return savedReport;
+    }
 
     @Override
     public Report checkReport(Long man_id) throws ParseException {
@@ -91,9 +92,15 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public RepresentativeInfoDTO getRepresentativeById(Long man_id,Long rep_id) {
-        return (representativeInfoMapper.RepresentativeToRepresentativeInfo(managerRepository.findAllReps(man_id,rep_id)));
+    public RepresentativeInfoDTO getRepresentativeById(Long man_id, Long rep_id) {
+        return (representativeInfoMapper.RepresentativeToRepresentativeInfo(managerRepository.findAllReps(man_id, rep_id)));
     }
+
+    @Override
+    public boolean checkForRepresentative(Long man_id, Long rep_id) {
+        return managerRepository.checkForRepresentative(man_id, rep_id);
+    }
+
 
 //    @Override
 //    public Page<Representative> getAllReps(Long man_id,Pageable pageable) {

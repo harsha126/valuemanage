@@ -28,7 +28,7 @@ public class Manager {
     private Set<Comment> comments = new HashSet<>();
     @OneToMany
     @Builder.Default
-    private Set<Report> reports = new HashSet<>();;
+    private Set<Report> reports = new HashSet<>();
     @OneToMany
     @Builder.Default
     private Set<Representative> representatives = new HashSet<>();
@@ -37,5 +37,5 @@ public class Manager {
     private Set<Distributor> distributors = new HashSet<>();
     @OneToMany
     @Builder.Default
-    private Set<Attendence> attendances = new HashSet<>();;
+    private Set<Attendence> attendances = new HashSet<>();
 }

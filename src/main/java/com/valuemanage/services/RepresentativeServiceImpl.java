@@ -95,8 +95,13 @@ public class RepresentativeServiceImpl implements RepresentativeService {
     }
 
     @Override
-    public List<Attendence> getAllAttendence(Long rep_id)  {
+    public List<Attendence> getAllAttendence(Long rep_id) {
         return representativeRepository.getAllAttendence(rep_id);
+    }
+
+    @Override
+    public boolean checkForRetailers(Long rep_id, Long ret_id) {
+        return representativeRepository.checkForRetailers(rep_id, ret_id);
     }
 
 

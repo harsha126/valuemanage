@@ -2,7 +2,10 @@ package com.valuemanage.services;
 
 import com.valuemanage.api.v1.model.RetailerDTO;
 import com.valuemanage.api.v1.model.RetailerInfoDTO;
-import com.valuemanage.domain.*;
+import com.valuemanage.domain.Attendence;
+import com.valuemanage.domain.NewReport;
+import com.valuemanage.domain.NewRetailer;
+import com.valuemanage.domain.Report;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,16 +17,22 @@ public interface RepresentativeService {
 
 //    public
 
-    public Page<RetailerDTO> getAllRetailers(Pageable pageable,Long rep_id);
-    public Page<RetailerInfoDTO> getRetailerById(Long rep_id,Long ret_id,Pageable pageable);
-    public RetailerDTO saveRetailer(Long rep_id, NewRetailer newretailer);
-//    public Report saveReport(Long rep_id,Report report) throws ParseException;
-    public Report saveReport(Long rep_id, NewReport newReport) throws ParseException;
-    public Report checkReport(Long rep_id) throws ParseException;
+    Page<RetailerDTO> getAllRetailers(Pageable pageable, Long rep_id);
 
-    public Attendence addAttendance(Long rep_id,Attendence attendence) throws ParseException;
+    Page<RetailerInfoDTO> getRetailerById(Long rep_id, Long ret_id, Pageable pageable);
 
-    public Attendence getAttendance(Long rep_id) throws ParseException;
+    RetailerDTO saveRetailer(Long rep_id, NewRetailer newretailer);
 
-    public List<Attendence> getAllAttendence(Long rep_id) ;
+    //    public Report saveReport(Long rep_id,Report report) throws ParseException;
+    Report saveReport(Long rep_id, NewReport newReport) throws ParseException;
+
+    Report checkReport(Long rep_id) throws ParseException;
+
+    Attendence addAttendance(Long rep_id, Attendence attendence) throws ParseException;
+
+    Attendence getAttendance(Long rep_id) throws ParseException;
+
+    List<Attendence> getAllAttendence(Long rep_id);
+
+    boolean checkForRetailers(Long rep_id, Long ret_id);
 }

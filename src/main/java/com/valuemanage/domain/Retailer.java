@@ -32,5 +32,4 @@ public class Retailer {
     private String owner;
 
 
-
 }

@@ -1,7 +1,10 @@
 package com.valuemanage.api.v1.mapper;
 
 import com.valuemanage.api.v1.model.RepresentativeInfoDTO;
-import com.valuemanage.domain.*;
+import com.valuemanage.domain.Attendence;
+import com.valuemanage.domain.Report;
+import com.valuemanage.domain.Representative;
+import com.valuemanage.domain.Retailer;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -9,7 +12,8 @@ import java.util.Set;
 
 @Component
 public class RepresentativeInfoMapper {
-    public RepresentativeInfoMapper(){}
+    public RepresentativeInfoMapper() {
+    }
 
     public RepresentativeInfoDTO RepresentativeToRepresentativeInfo(Representative Representative) {
         if (Representative == null) {
@@ -32,10 +36,10 @@ public class RepresentativeInfoMapper {
             }
 
             Set<Retailer> set2 = Representative.getRetailers();
-            if(set2 != null){
+            if (set2 != null) {
                 Set<String> set3 = new HashSet<>();
-                set2.forEach(Retailer ->{
-                    if(Retailer.getBusinessName()!=null) set3.add(Retailer.getBusinessName());
+                set2.forEach(Retailer -> {
+                    if (Retailer.getBusinessName() != null) set3.add(Retailer.getBusinessName());
                 });
                 RepresentativeInfoDTO.setRetailers(set3);
             }

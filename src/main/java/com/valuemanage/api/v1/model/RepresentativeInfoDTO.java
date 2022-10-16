@@ -1,6 +1,7 @@
 package com.valuemanage.api.v1.model;
 
-import com.valuemanage.domain.*;
+import com.valuemanage.domain.Attendence;
+import com.valuemanage.domain.Report;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

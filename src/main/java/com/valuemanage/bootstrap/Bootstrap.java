@@ -7,15 +7,12 @@ import com.valuemanage.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 @Slf4j
 @Component
@@ -48,13 +45,13 @@ public class Bootstrap implements CommandLineRunner {
         Date date4 = formatter.parse("01/10/2022");
         Date date5 = formatter.parse("12/10/2022");
 
-        userService.saveNewUser("man0","admin","MANAGER",1L);
-        userService.saveNewUser("man1","admin","MANAGER",2L);
-        userService.saveNewUser("rep0","admin","REPRESENTATIVE",1L);
-        userService.saveNewUser("rep1","admin","REPRESENTATIVE",2L);
-        userService.saveNewUser("rep2","admin","REPRESENTATIVE",3L);
-        userService.saveNewUser("rep3","admin","REPRESENTATIVE",4L);
-        userService.saveNewUser("rep4","admin","REPRESENTATIVE",5L);
+        userService.saveNewUser("man0", "admin", "MANAGER", 1L);
+        userService.saveNewUser("man1", "admin", "MANAGER", 2L);
+        userService.saveNewUser("rep0", "admin", "REPRESENTATIVE", 1L);
+        userService.saveNewUser("rep1", "admin", "REPRESENTATIVE", 2L);
+        userService.saveNewUser("rep2", "admin", "REPRESENTATIVE", 3L);
+        userService.saveNewUser("rep3", "admin", "REPRESENTATIVE", 4L);
+        userService.saveNewUser("rep4", "admin", "REPRESENTATIVE", 5L);
 
         Comment comment1 = Comment.builder().text("comment1").build();
         Comment comment2 = Comment.builder().text("comment2").build();
@@ -103,7 +100,7 @@ public class Bootstrap implements CommandLineRunner {
         Order order8 = Order.builder().supplierName("supp8").build();
         Order order9 = Order.builder().supplierName("supp9").build();
         Order order10 = Order.builder().supplierName("sup10").build();
-        Order order11= Order.builder().supplierName("supp11").build();
+        Order order11 = Order.builder().supplierName("supp11").build();
 
         orderRepository.save(order1);
         orderRepository.save(order2);

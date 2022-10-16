@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveNewUser(User user) {
         User t = userRepository.findByUsername(user.getUsername().trim());
-        if(t != null) log.info("User with username {}",user.getUsername());
-        else{
+        if (t != null) log.info("User with username {}", user.getUsername());
+        else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
         }
@@ -30,11 +30,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveNewUser(String username, String password, String role, Long uid) {
         User t = userRepository.findByUsername(username.trim());
-        if(t!=null) log.info("User with username {}",username);
-        else{
+        if (t != null) log.info("User with username {}", username);
+        else {
             User newUser = User.builder().username(username).password(passwordEncoder.encode(password)).role(role).uid(uid).build();
             userRepository.save(newUser);
-            log.info("Saved a new User with username : {} , password : {} , role : {} and uid : {}",username,password,role,uid);
+            log.info("Saved a new User with username : {} , password : {} , role : {} and uid : {}", username, password, role, uid);
         }
     }
 }

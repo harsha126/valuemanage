@@ -18,17 +18,17 @@ public class RetailerController {
     }
 
     @GetMapping
-    public Page<RetailerDTO> getAllRetailers(@RequestParam(name = "size",defaultValue = "5") int size,
-                                             @RequestParam(name = "page",defaultValue = "0") int page){
+    public Page<RetailerDTO> getAllRetailers(@RequestParam(name = "size", defaultValue = "5") int size,
+                                             @RequestParam(name = "page", defaultValue = "0") int page) {
         return retailerService.getAllRetailers(PageRequest.of(page, size));
     }
 
     @GetMapping({"/{Id}"})
-    public Page<RetailerInfoDTO> getRetailerInfo(@RequestParam(name = "size",defaultValue = "5") int size,
-                                                 @RequestParam(name = "page",defaultValue = "0") int page,
-                                                 @PathVariable String Id){
+    public Page<RetailerInfoDTO> getRetailerInfo(@RequestParam(name = "size", defaultValue = "5") int size,
+                                                 @RequestParam(name = "page", defaultValue = "0") int page,
+                                                 @PathVariable String Id) {
         System.out.println(Id);
-        return retailerService.getRetailerById(Long.parseLong(Id),PageRequest.of(page, size));
+        return retailerService.getRetailerById(Long.parseLong(Id), PageRequest.of(page, size));
     }
 
 }
