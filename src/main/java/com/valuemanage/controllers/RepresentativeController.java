@@ -3,17 +3,21 @@ package com.valuemanage.controllers;
 import com.valuemanage.api.v1.model.RetailerDTO;
 import com.valuemanage.api.v1.model.RetailerInfoDTO;
 import com.valuemanage.domain.*;
+import com.valuemanage.security.UserPrincipal;
 import com.valuemanage.services.RepresentativeService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.List;
 
 @RestController
 @CrossOrigin
 @RequestMapping({"/api/v1/representatives"})
+@PreAuthorize("hasRole('ROLE_REPRESENTATIVE')")
 public class RepresentativeController {
     private final RepresentativeService representativeService;
 
@@ -21,55 +25,56 @@ public class RepresentativeController {
         this.representativeService = representativeService;
     }
 
-
-
-    @GetMapping({"/{rep_id}/retailers"})
-    public Page<RetailerDTO> getAllRetailers(@RequestParam(name = "size",defaultValue = "5") int size,
-                                             @RequestParam(name = "page",defaultValue = "0") int page,
-                                             @PathVariable String rep_id){
-        return representativeService.getAllRetailers(PageRequest.of(page, size),Long.parseLong(rep_id));
+    public Long getId(){
+        UserPrincipal userPrincipal  = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userPrincipal.getUser().getUid();
     }
 
-    @GetMapping({"/{rep_id}/retailers/{ret_id}"})
-    public Page<RetailerInfoDTO> getAllRetailers(@RequestParam(name = "size",defaultValue = "5") int size,
+
+
+    @GetMapping({"/retailers"})
+    public ResponseEntity<?> getAllRetailers(@RequestParam(name = "size",defaultValue = "5") int size,
+                                             @RequestParam(name = "page",defaultValue = "0") int page){
+        return ResponseEntity.ok(representativeService.getAllRetailers(PageRequest.of(page, size),getId()));
+    }
+
+    @GetMapping({"/retailers/{ret_id}"})
+    public ResponseEntity<?> getRetailersInfo(@RequestParam(name = "size",defaultValue = "5") int size,
                                                  @RequestParam(name = "page",defaultValue = "0") int page,
-                                                 @PathVariable String rep_id,
                                                  @PathVariable String ret_id){
-        return representativeService.getRetailerById(Long.parseLong(rep_id),Long.parseLong(ret_id),PageRequest.of(page,size));
+        return ResponseEntity.ok(representativeService.getRetailerById(getId(),Long.parseLong(ret_id),PageRequest.of(page,size)));
     }
 
-    @PostMapping({"/{rep_id}/retailers/new"})
-    public RetailerDTO addNewRetailer(@PathVariable String rep_id, @RequestBody NewRetailer newretailer){
-        return representativeService.saveRetailer(Long.parseLong(rep_id),newretailer);
+    @PostMapping({"/retailers/new"})
+    public ResponseEntity<?> addNewRetailer( @RequestBody NewRetailer newretailer){
+        return ResponseEntity.ok(representativeService.saveRetailer(getId(),newretailer));
     }
 
-    @GetMapping({"/{rep_id}/report/"})
-    public Report checkReport(@PathVariable String rep_id) throws ParseException {
-        Report report = representativeService.checkReport(Long.parseLong(rep_id));
-//        System.out.println(report+"fddskjldslsjlslhgfdsasdfghjklkjhgfdsasdfghjklkjhgfdsasdfghjkl");
-        if(report == null) return new Report();
-        return report;
+    @GetMapping({"/report"})
+    public ResponseEntity<?> checkReport() throws ParseException {
+        Report report = representativeService.checkReport(getId());
+        if(report == null) return ResponseEntity.badRequest().body("no report");
+        return ResponseEntity.ok(report);
+    }
+    @PostMapping({"/report/new"})
+    public ResponseEntity<?> addNewReport(@RequestBody NewReport newReport) throws ParseException {
+        return ResponseEntity.ok(representativeService.saveReport(getId(),newReport));
     }
 
-    @PostMapping({"/{rep_id}/report/new"})
-    public Report addNewReport(@PathVariable String rep_id,@RequestBody NewReport newReport) throws ParseException {
-        return representativeService.saveReport(Long.parseLong(rep_id),newReport);
+
+    @PostMapping({"/attendance/new"})
+    public ResponseEntity<?> addAttendance(@RequestBody Attendence attendence) throws ParseException {
+        return ResponseEntity.ok(representativeService.addAttendance(getId(),attendence));
     }
 
-
-    @PostMapping({"/{rep_id}/attendance/new"})
-    public Attendence addAttendance(@PathVariable String rep_id,@RequestBody Attendence attendence) throws ParseException {
-        return representativeService.addAttendance(Long.parseLong(rep_id),attendence);
+    @GetMapping({"/attendance"})
+    public ResponseEntity<?> checkAttendance() throws ParseException {
+        return ResponseEntity.ok(representativeService.getAttendance(getId()));
     }
 
-    @GetMapping({"/{rep_id}/attendance"})
-    public Attendence checkAttendence(@PathVariable String rep_id) throws ParseException {
-        return representativeService.getAttendance(Long.parseLong(rep_id));
-    }
-
-    @GetMapping({"/{rep_id}/attendence/all"})
-    public List<Attendence> getAttendence(@PathVariable String rep_id){
-        return representativeService.getAllAttendence(Long.parseLong(rep_id));
+    @GetMapping({"/attendence/all"})
+    public ResponseEntity<?> getAttendence(){
+        return ResponseEntity.ok(representativeService.getAllAttendence(getId()));
     }
 
 

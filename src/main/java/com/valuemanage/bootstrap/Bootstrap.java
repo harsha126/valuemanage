@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -35,13 +37,31 @@ public class Bootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Date date = new Date();
-//        User dan = new User("dan",passwordEncoder.encode("dan123"),"USER","");
-//        User admin = new User("admin",passwordEncoder.encode("admin123"),"ADMIN","ACCESS_TEST1,ACCESS_TEST2");
-//        User manager = new User("manager",passwordEncoder.encode("manager123"),"MANAGER","ACCESS_TEST1");
-//        List<User> users = Arrays.asList(dan,admin,manager);
-//        userRepository.saveAll(users);
+        Date date1 = formatter.parse("05/10/2022");
+        Date date2 = formatter.parse("03/10/2022");
+        Date date3 = formatter.parse("05/09/2022");
+        Date date4 = formatter.parse("01/10/2022");
+        Date date5 = formatter.parse("12/10/2022");
+
+        User user1 = User.builder().username("man0").password(passwordEncoder.encode("admin")).role("MANAGER").uid(1L).build();
+        User user2 = User.builder().username("man1").password(passwordEncoder.encode("admin")).role("MANAGER").uid(2L).build();
+        User user3 = User.builder().username("rep0").password(passwordEncoder.encode("admin")).role("REPRESENTATIVE").uid(1L).build();
+        User user4 = User.builder().username("rep1").password(passwordEncoder.encode("admin")).role("REPRESENTATIVE").uid(2L).build();
+        User user5 = User.builder().username("rep2").password(passwordEncoder.encode("admin")).role("REPRESENTATIVE").uid(3L).build();
+        User user6 = User.builder().username("rep3").password(passwordEncoder.encode("admin")).role("REPRESENTATIVE").uid(4L).build();
+        User user7 = User.builder().username("rep4").password(passwordEncoder.encode("admin")).role("REPRESENTATIVE").uid(5L).build();
+
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+        userRepository.save(user4);
+        userRepository.save(user5);
+        userRepository.save(user6);
+        userRepository.save(user7);
+
         Comment comment1 = Comment.builder().text("comment1").build();
         Comment comment2 = Comment.builder().text("comment2").build();
         Comment comment3 = Comment.builder().text("comment3").build();
@@ -64,10 +84,20 @@ public class Bootstrap implements CommandLineRunner {
         Attendence attendence2 = Attendence.builder().date(date).build();
         Attendence attendence3 = Attendence.builder().date(date).build();
         Attendence attendence4 = Attendence.builder().date(date).build();
+        Attendence attendence5 = Attendence.builder().date(date1).build();
+        Attendence attendence6 = Attendence.builder().date(date2).build();
+        Attendence attendence7 = Attendence.builder().date(date3).build();
+        Attendence attendence8 = Attendence.builder().date(date4).build();
+        Attendence attendence9 = Attendence.builder().date(date5).build();
         attendenceRepository.save(attendence1);
         attendenceRepository.save(attendence2);
         attendenceRepository.save(attendence3);
         attendenceRepository.save(attendence4);
+        attendenceRepository.save(attendence5);
+        attendenceRepository.save(attendence6);
+        attendenceRepository.save(attendence7);
+        attendenceRepository.save(attendence8);
+        attendenceRepository.save(attendence9);
 
         Order order1 = Order.builder().supplierName("supp1").build();
         Order order2 = Order.builder().supplierName("supp2").build();
@@ -148,9 +178,15 @@ public class Bootstrap implements CommandLineRunner {
         representative5.getRetailers().add(retailer9);
         representative3.getRetailers().add(retailer10);
 
-        representative1.getAttendances().add(attendence1);
+//        representative1.getAttendances().add(attendence1);
+//        representative1.getAttendances().add(attendence4);
+        representative1.getAttendances().add(attendence5);
+        representative1.getAttendances().add(attendence6);
         representative2.getAttendances().add(attendence2);
+        representative2.getAttendances().add(attendence7);
+        representative2.getAttendances().add(attendence8);
         representative5.getAttendances().add(attendence3);
+        representative5.getAttendances().add(attendence9);
 
         representativeRepository.save(representative1);
         representativeRepository.save(representative2);

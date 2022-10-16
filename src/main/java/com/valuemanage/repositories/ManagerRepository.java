@@ -23,4 +23,6 @@ public interface ManagerRepository extends JpaRepository<Manager,Long> {
     Report findReportByDate(Long man_id, Date date);
     @Query("select rep from Manager m join m.representatives rep where m.id = ?1 and rep.id = ?2 ")
     Representative findAllReps(Long man_id,Long rep_id);
+    @Query("select a from Manager m join m.representatives r join r.attendances a where m.id = ?1 and r.id = ?2 ")
+    List<Attendence> findAllAttendenceOfRepresentativeById(Long man_id,Long rep_id);
 }

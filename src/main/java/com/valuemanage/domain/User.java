@@ -7,20 +7,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Builder
-@Table(name = "User_Details")
+@Table(name = "users_table")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
     private String password;
+    private String role = "";
+    private Long uid;
+
     private Integer active;
     private String roles = "";
     private String permissions = "";
@@ -34,7 +39,7 @@ public class User {
     }
 
     public List<String> getRoleList(){
-        if(this.roles.length() > 0) return Arrays.asList(this.roles.split(","));
+        if(this.role.length() > 0) return Arrays.asList(this.role.split(","));
         return new ArrayList<>();
     }
 
@@ -44,5 +49,6 @@ public class User {
         }
         return new ArrayList<>();
     }
+
 
 }

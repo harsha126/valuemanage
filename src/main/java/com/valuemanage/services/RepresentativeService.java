@@ -15,7 +15,7 @@ public interface RepresentativeService {
 //    public
 
     public Page<RetailerDTO> getAllRetailers(Pageable pageable,Long rep_id);
-    public Page<RetailerInfoDTO> getRetailerById(Long ret_id,Long rep_id,Pageable pageable);
+    public Page<RetailerInfoDTO> getRetailerById(Long rep_id,Long ret_id,Pageable pageable);
     public RetailerDTO saveRetailer(Long rep_id, NewRetailer newretailer);
 //    public Report saveReport(Long rep_id,Report report) throws ParseException;
     public Report saveReport(Long rep_id, NewReport newReport) throws ParseException;

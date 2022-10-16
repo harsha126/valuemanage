@@ -42,18 +42,23 @@ public class RepresentativeServiceImpl implements RepresentativeService {
     }
 
     @Override
-    public Page<RetailerInfoDTO> getRetailerById(Long ret_id, Long rep_id, Pageable pageable) {
+    public Page<RetailerInfoDTO> getRetailerById(Long rep_id, Long ret_id, Pageable pageable) {
         return representativeRepository.findRetailerById(rep_id, ret_id, pageable).map(retailerInfoMapper::RetailerToRetailerInfo);
     }
 
     @Override
     public RetailerDTO saveRetailer(Long rep_id, NewRetailer newRetailer) {
 
+        System.out.println(newRetailer.toString());
         Address address = Address.builder().houseNo(newRetailer.getHouseNo()).street(newRetailer.getStreet()).city(newRetailer.getCity()).state(newRetailer.getState()).pinCode(newRetailer.getPinCode()).country(newRetailer.getCountry()).build();
         Retailer retailer = Retailer.builder().name(newRetailer.getName()).businessName(newRetailer.getBusinessName()).phoneNumber(newRetailer.getPhoneNumber()).owner(newRetailer.getOwner()).build();
         Address savedAddress = addressRepository.save(address);
         retailer.setAddress(savedAddress);
-        return retailerListMapper.RetailerToRetailerDTO(retailerRepository.save(retailer));
+        Retailer savedRetailer = retailerRepository.save(retailer);
+        Representative representative = representativeRepository.findById(rep_id).get();
+        representative.getRetailers().add(savedRetailer);
+        representativeRepository.save(representative);
+        return retailerListMapper.RetailerToRetailerDTO(savedRetailer);
     }
 
     @Override

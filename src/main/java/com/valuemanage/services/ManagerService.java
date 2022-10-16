@@ -26,4 +26,5 @@ public interface ManagerService {
     public Report saveReport(Long man_id, NewReport newReport) throws ParseException;
     public Report checkReport(Long man_id) throws ParseException;
     public RepresentativeInfoDTO getRepresentativeById(Long man_id,Long rep_id);
+//    public List<Attendence> get
 }
