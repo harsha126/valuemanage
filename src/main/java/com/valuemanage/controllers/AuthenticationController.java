@@ -4,18 +4,17 @@ import com.valuemanage.domain.User;
 import com.valuemanage.security.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin
 @RequestMapping("/api/v1")
 public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
@@ -39,7 +38,7 @@ public class AuthenticationController {
             System.out.println("-----------------------" + user.getRole());
 
             final String accessToken = jwtTokenUtil.generateToken(userPrincipal);
-            return ResponseEntity.ok(new AuthenticationResponse(accessToken, user.getRole()));
+            return ResponseEntity.ok(new AuthenticationResponse(accessToken, user.getRole(),user.getUsername()));
         } catch (UsernameNotFoundException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("BAD CREDENTIALS");
         }
