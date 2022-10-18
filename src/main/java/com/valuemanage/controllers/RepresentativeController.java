@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -55,9 +56,9 @@ public class RepresentativeController {
 
     @GetMapping({"/report"})
     public ResponseEntity<?> checkReport() throws ParseException {
-        Report report = representativeService.checkReport(getId());
-        if (report == null) return ResponseEntity.badRequest().body("no report");
-        return ResponseEntity.ok(report);
+        List<Report> report = representativeService.checkReport(getId());
+        if (report.size() == 0) return ResponseEntity.badRequest().body("no report");
+        return ResponseEntity.ok(report.get(report.size()-1));
     }
 
     @PostMapping({"/report/new"})

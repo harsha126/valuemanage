@@ -22,7 +22,7 @@ public interface RepresentativeRepository extends JpaRepository<Representative, 
     Page<Retailer> findRetailerById(Long rep_id, Long Ret_id, Pageable pageable);
 
     @Query("select report from Representative r join r.reports report where r.id = ?1 and report.date = ?2 ")
-    Report findReportByDate(Long rep_id, Date date);
+    List<Report> findReportByDate(Long rep_id, Date date);
 
     @Query("select a from Representative r join r.attendances a where r.id = ?1 and a.date = ?2")
     Attendence getAttendance(Long rep_id, Date date);

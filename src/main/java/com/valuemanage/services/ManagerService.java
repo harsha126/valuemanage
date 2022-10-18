@@ -29,7 +29,7 @@ public interface ManagerService {
 
     Report saveReport(Long man_id, NewReport newReport) throws ParseException;
 
-    Report checkReport(Long man_id) throws ParseException;
+    List<Report> checkReport(Long man_id) throws ParseException;
 
     RepresentativeInfoDTO getRepresentativeById(Long man_id, Long rep_id);
 

@@ -86,7 +86,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public Report checkReport(Long man_id) throws ParseException {
+    public List<Report> checkReport(Long man_id) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         return managerRepository.findReportByDate(man_id, format.parse(format.format(new Date())));
     }
