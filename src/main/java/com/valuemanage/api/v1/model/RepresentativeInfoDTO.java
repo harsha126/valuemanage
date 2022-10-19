@@ -21,5 +21,5 @@ public class RepresentativeInfoDTO {
     private String owner;
     private Set<Attendence> attendances;
     private Set<Report> reports;
-    private Set<String> retailers;
+    private Set<RetailerDTO> retailers;
 }
