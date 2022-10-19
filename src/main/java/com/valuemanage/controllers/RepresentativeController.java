@@ -1,9 +1,6 @@
 package com.valuemanage.controllers;
 
-import com.valuemanage.domain.Attendence;
-import com.valuemanage.domain.NewReport;
-import com.valuemanage.domain.NewRetailer;
-import com.valuemanage.domain.Report;
+import com.valuemanage.domain.*;
 import com.valuemanage.security.UserPrincipal;
 import com.valuemanage.services.RepresentativeService;
 import org.springframework.data.domain.PageRequest;
@@ -58,7 +55,7 @@ public class RepresentativeController {
     public ResponseEntity<?> checkReport() throws ParseException {
         List<Report> report = representativeService.checkReport(getId());
         if (report.size() == 0) return ResponseEntity.badRequest().body("no report");
-        return ResponseEntity.ok(report.get(report.size()-1));
+        return ResponseEntity.ok(report.get(report.size() - 1));
     }
 
     @PostMapping({"/report/new"})
@@ -82,5 +79,15 @@ public class RepresentativeController {
         return ResponseEntity.ok(representativeService.getAllAttendence(getId()));
     }
 
-
+    @PostMapping({"/comment/{ret_id}"})
+    public ResponseEntity<?> addNewComment(@RequestBody Comment comment, @PathVariable Long ret_id) {
+        if (representativeService.checkForRetailers(getId(), ret_id)) {
+            representativeService.addNewComment(comment, getId(), ret_id);
+            return ResponseEntity.status(HttpStatus.OK).body("Added comment Successfully");
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized Retailer Access for a representative");
+    }
 }
+
+
+

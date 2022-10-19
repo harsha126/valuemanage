@@ -2,10 +2,7 @@ package com.valuemanage.services;
 
 import com.valuemanage.api.v1.model.RetailerDTO;
 import com.valuemanage.api.v1.model.RetailerInfoDTO;
-import com.valuemanage.domain.Attendence;
-import com.valuemanage.domain.NewReport;
-import com.valuemanage.domain.NewRetailer;
-import com.valuemanage.domain.Report;
+import com.valuemanage.domain.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.util.Pair;
@@ -39,4 +36,6 @@ public interface RepresentativeService {
     boolean checkForRetailers(Long rep_id, Long ret_id);
 
     Pair<Date, Date> getDateRange(Date date);
+
+    void addNewComment(Comment comment,Long rep_id,Long ret_id);
 }

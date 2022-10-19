@@ -33,6 +33,7 @@ public class RepresentativeServiceImpl implements RepresentativeService {
     private final ReportRepository reportRepository;
     private final ReportService reportService;
     private final AttendenceService attendenceService;
+    private final CommentService commentService;
 
 
     @Override
@@ -147,6 +148,18 @@ public class RepresentativeServiceImpl implements RepresentativeService {
 
         return Pair.of(begin,end);
 
+    }
+
+    @Override
+    public void addNewComment(Comment comment,Long rep_id, Long ret_id) {
+        Retailer  retailer = representativeRepository.findRetailerById(rep_id,ret_id);
+        Representative representative  = representativeRepository.findById(rep_id).get();
+        comment.setDate(new Date());
+        comment.setName(retailer.getName());
+        Comment savedComment  = commentService.save(comment);
+        retailer.getComments().add(savedComment);
+        retailerRepository.save(retailer);
+        representativeRepository.save(representative);
     }
 
 
