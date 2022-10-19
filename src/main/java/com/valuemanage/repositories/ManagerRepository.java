@@ -31,6 +31,6 @@ public interface ManagerRepository extends JpaRepository<Manager, Long> {
     @Query("select a from Manager m join m.representatives r join r.attendances a where m.id = ?1 and r.id = ?2 ")
     List<Attendence> findAllAttendenceOfRepresentativeById(Long man_id, Long rep_id);
 
-    @Query("select count(rep) > 0 from Manager man join Representative rep where man.id = ?1 and rep.id = ?2")
+    @Query("select count(rep) > 0 from Manager man join man.representatives rep where man.id = ?1 and rep.id = ?2")
     boolean checkForRepresentative(Long man_id, Long rep_id);
 }
